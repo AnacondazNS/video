@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    background-color: rgb(233 241 232); 
+}
+.bg-gray-100 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(233 241 232 / var(--tw-bg-opacity));
+  }
+
+  .text-gray-900 {
+    --tw-text-opacity: 1;
+    color: rgb(17 24 39 / var(--tw-text-opacity));
+    font-size: x-large;
+  }
+
+  .text-gray-700 {
+    --tw-text-opacity: 1;
+    color: rgb(55 65 81 / var(--tw-text-opacity));
+    font-size: x-small;
+}
+.p-6 {
+    padding: 1.5rem;
+    object-fit: cover;
+    background: url(/frog2.png);
+}
+
+.like{
+    width: 24px;
+    height: 24px;
+    background: url(/Like.png);
+}
+.like:hover{
+    width: 24px;
+    height: 24px;
+    background: url(/Like-active.png);
+}
+
+
+.dizlike{
+    width: 24px;
+    height: 24px;
+    background: url(/Dizlike.png);
+}
+.dizlike:hover{
+    width: 24px;
+    height: 24px;
+    background: url(/Dizlike-active.png);
+}
+
+
+
+.h-min{
+    font-size: small;
+}
+
+.comment{
+    border: 1px solid rgb(191, 192, 191);
+}
+.w-3\/6 {
+    width: 100%; 
+}
+.p-2 {
+    padding: 0.5rem;
+    width: 80%;
+    height: 40px;
+}

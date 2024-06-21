@@ -3,86 +3,88 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Video;
-
-
+use App\Models\{Video, Category, Like, Comment};
+use Auth;
 
 class VideoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+    public function welcome() {
+        if (Auth::user() and Auth::user()->is_admin == true)
+            $videos = Video::orderBy('created_at', 'DESC')->get();
+        else
+            $videos = Video::orderBy('created_at', 'DESC')->where('visibility', 'unban')->get();
+        return view('welcome', ['videos' => $videos]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+    public function new_video(Request $request) {
+        $validated = $request->validate([
+            'video_name' => 'required',
+            'video_message' => 'required',
+            'video_file' => 'required|mimes:mp4'
+        ]);
+
+        $name = time(). "." . $request->video_file->extension();
+        $destination = 'public/';
+        $path = $request->video_file->storeAs($destination, $name);
+        $video = [
+            'name' => $request->video_name,
+            'description' => $request->video_message,
+            'path' => 'storage/' . $name,
+            'category_id' => $request->category_id,
+            'user_id' => Auth::user()->id
+        ];
+        Video::create($video);
+        return redirect()->back();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-  
+    public function dashboard() {
+        return view('dashboard', [
+            'user_videos' => Video::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->get(), 
+            'categories' => Category::get()]);
+    }
 
-        public function store(Request $request)
-        {
-            $request->validate([
-                'title' => 'required|string',
-                'description' => 'required|string',
-                'video' => 'required|file|mimetypes:video/mp4',
+    public function watch_video($id) {
+        return view('video', [
+            'video' => Video::with(['user', 'category'])->where('id', $id)->find($id),
+            'like' => Like::where('video_id', $id)->where('status', 'like')->get(),
+            'dislike' => Like::where('video_id', $id)->where('status', 'dislike')->get(),
+            'comments' => Comment::with(['video', 'user'])->where('video_id', $id)->orderBy('created_at', 'DESC')->get()]);
+    }
+
+    public function ban_video($id, $status) {
+        $video = Video::where('id', $id)->first();
+        Video::where('id', $id)->update(['visibility' => $status]);
+        return redirect()->back();
+    }
+
+    public function like_video($id, $status) {
+        $user = Auth::user();
+        $like = Like::where('user_id', $user->id)->where('video_id', $id)->first();
+        if ($like) {
+            if ($like->status == $status) {
+                $like->delete();
+            } else {
+                $like->status = $status;
+                $like->save();
+            }
+        } else {
+            $like_info = ([
+                'user_id' => $user->id,
+                'video_id' => $id,
+                'status' => $status,
             ]);
-    
-            $path = $request->file('video')->store('videos', 'public');
-    
-            $video = Video::create([
-                'title' => $request->title,
-                'description' => $request->description,
-                'path' => $path,
-                'user_id' => auth()->id(),
-            ]);
-    
-            return response()->json(['video' => $video], 201);
+            Like::create($like_info);
         }
-    
-    
+        return redirect()->back();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
-{
-    $video = Video::with('comments')->findOrFail($id);
-    return response()->json(['video' => $video], 200);
-} 
-
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function new_comment($id, Request $request)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        Comment::create([
+            'user_id' => Auth::user()->id,
+            'video_id' => $id,
+            'message' => $request->message
+        ]);
+        return redirect()->back();
     }
 }

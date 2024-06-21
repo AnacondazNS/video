@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'sqlite'),
+    'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -44,7 +44,7 @@ return [
             'url' => env('DB_URL'),
             'host' => env('DB_HOST', 'web.edu'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', '21037_video-hosting'),
+            'database' => env('DB_DATABASE', '21037_video'),
             'username' => env('DB_USERNAME', '21037'),
             'password' => env('DB_PASSWORD', 'nvmgze'),
             'unix_socket' => env('DB_SOCKET', ''),

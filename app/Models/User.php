@@ -9,12 +9,17 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class);
-    }
     use HasFactory, Notifiable;
 
+    public function videos() {
+        return $this->hasMany(Video::class);
+    }
+    public function likes() {
+        return $this->hasMany(Like::class);
+    }
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
     /**
      * The attributes that are mass assignable.
      *
