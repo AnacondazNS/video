@@ -14,8 +14,8 @@
                         <h1 class="font-semibold">Автор: {{ $video->user->name }}</h1>
                         <p class="h-min">{{ $video->created_at->format('M. j, Y h:m') }}</p>
                 <div class="p-6 w-full text-gray-900 dark:text-gray-100 flex justify-center">
-                        <video class="" autoplay controls controlsList="nodownload">
-                        <source src="{{ asset($video->path) }}" type="video/mp4">
+                        <video class="video" autoplay controls controlsList="nodownload">
+                        <source src="{{ asset('$video->path') }}" type="video/mp4">
                         </video>
                 </div>
                     <div class="p-6 text-gray-900 dark:text-gray-100 h-auto">

@@ -22,14 +22,13 @@ class VideoController extends Controller
             'video_message' => 'required',
             'video_file' => 'required|mimes:mp4'
         ]);
-
-        $name = time(). "." . $request->video_file->extension();
-        $destination = 'public/';
-        $path = $request->video_file->storeAs($destination, $name);
+        $name = time(). ".". $request->video_file->extension();
+        $destination = 'videos'; // Update this line
+        $path = $request->video_file->storeAs($destination, $name, 'public'); // Add 'public' as the third argument
         $video = [
             'name' => $request->video_name,
             'description' => $request->video_message,
-            'path' => 'storage/' . $name,
+            'path' => 'storage/app/public/'. $destination. '/'. $name,
             'category_id' => $request->category_id,
             'user_id' => Auth::user()->id
         ];
