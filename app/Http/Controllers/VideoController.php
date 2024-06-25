@@ -28,7 +28,7 @@ class VideoController extends Controller
         $video = [
             'name' => $request->video_name,
             'description' => $request->video_message,
-            'path' => 'storage/app/public/'. $destination. '/'. $name,
+            'path' => $name,
             'category_id' => $request->category_id,
             'user_id' => Auth::user()->id
         ];

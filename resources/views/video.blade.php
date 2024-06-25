@@ -15,7 +15,7 @@
                         <p class="h-min">{{ $video->created_at->format('M. j, Y h:m') }}</p>
                 <div class="p-6 w-full text-gray-900 dark:text-gray-100 flex justify-center">
                         <video class="video" autoplay controls controlsList="nodownload">
-                        <source src="{{ asset('$video->path') }}" type="video/mp4">
+                        <source src="{{'storage/app/public/videos/' . $video->path}}" type="video/mp4">
                         </video>
                 </div>
                     <div class="p-6 text-gray-900 dark:text-gray-100 h-auto">
