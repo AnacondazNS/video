@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->string('path');
             $table->string('description');
+            $table->string('preview');
             $table->integer('count_like')->default(0);
             $table->integer('count_dislike')->default(0);
             $table->string('visibility')->default('unban');
