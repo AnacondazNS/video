@@ -16,7 +16,8 @@ class Video extends Model
         'description',
         'count_like',
         'count_dislike',
-        'visibility'
+        'visibility',
+        'imgpath'
     ];
 
     public function category() {

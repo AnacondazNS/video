@@ -13,7 +13,11 @@
                                 <a href="{{ route('watchVideo', ['id' => $video->id]) }}" class="flex pb-6">
                                     <div
                                         class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                                        <video class="w-96">
+                                        <img 
+                                   src="{{asset('storage/' . $video->imgpath) }}" 
+                                   class="w-30 p-1"
+                                   alt="Превью">
+                                        <video class="w-1">
                                             <source src="{{ asset($video->path) }}" type="video/mp4">
                                         </video>
                                         <div class="p-5">

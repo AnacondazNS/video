@@ -25,13 +25,24 @@ class VideoController extends Controller
         $name = time(). ".". $request->video_file->extension();
         $destination = 'videos'; // Update this line
         $path = $request->video_file->storeAs($destination, $name, 'public'); // Add 'public' as the third argument
+
+        $originalFilenamePoto = $request->file('image_file')->getClientOriginalName();
+        $fileNamePoto = time(). ".". $originalFilenamePoto;
+        $filePathPoto = $request->file('image_file')->storeAs('image',$fileNamePoto,'public');
+
+
         $video = [
             'name' => $request->video_name,
             'description' => $request->video_message,
             'path' => $name,
             'category_id' => $request->category_id,
-            'user_id' => Auth::user()->id
+            'user_id' => Auth::user()->id,
+            'imgpath'=> $filePathPoto
         ];
+
+ 
+
+
         Video::create($video);
         return redirect()->back();
     }
