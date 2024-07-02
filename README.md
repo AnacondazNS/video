@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://media.giphy.com/media/59d1zo8SUSaUU/giphy.gif" width="600" height="300"/>
+  <img src="https://gifs.ru/gifs/15636" width="600" height="300"/>
 </div>
 
 **Установка**
@@ -11,12 +11,10 @@
 - Добавить composer `Composer i`
 ---
 **Запуск**
-- Создать файл конфигурации с примера `Copy .env.example .env`
+- Настроить файл конфигурации с примера `.env`
 >*Файл .env* <br> - Отредактировать файл конфигурации
 - Создать ключ приложения `php artisan key:generate`
 - Мигрировать таблицы `php artisan migrate`
-- Создание админа `php artisan db:seed`
-- Создать хранилище `php artisan storage:link`
 - Запустить приложения `npm run dev` и `php artisan serve`
 ---
 **Данные админа**
