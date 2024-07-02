@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://gifs.ru/gifs/15636" width="600" height="300"/>
+  <img src="https://media.tenor.com/_PirfTYr7EkAAAAd/laugh-homelander.gif" width="600" height="300"/>
 </div>
 
 **Установка**
