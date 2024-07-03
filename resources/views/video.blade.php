@@ -20,11 +20,12 @@
                 </div>
                 <div class="p-6 text-gray-900 dark:text-gray-100 h-auto">
                     <div class=" whitespace-nowrap flex justify-between w-max gap-5">
+                        лайк
                         <a href="{{ route('LikeVideo', ['id' => $video->id, 'status' => 'like']) }}"
                             class="p-2 hover:bg-zinc-300 rounded w-100 bg-gray-200 dark:text-black"><button
                                 class="like"></button>
                             {{ count($like) }}</a>
-
+дизлайк
                         <a href="{{ route('LikeVideo', ['id' => $video->id, 'status' => 'dislike']) }}"
                             class="p-2 hover:bg-zinc-300 rounded w-100 bg-gray-200 dark:text-black"><button
                                 class="dizlike"></button>
